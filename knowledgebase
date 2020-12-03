@@ -1,0 +1,159 @@
+Installation - nodejs.org
+NodeJs is a JS runtime built on chrome's V8 JS engine.
+node passes the JS code alomg with C++ bindings 
+
+Node REPL - node - process.exit() - to exit out of REPL
+Importing node core module - const fs = require("fs");
+Impoting from local js - const note = require('./notes.js')
+Importing npm package - const chalk = require('chalk')
+
+exporting - module.exports = {
+  getNotes: getNotes,
+  addNote: addNote,
+  removeNote: removeNote,
+  listNotes: listNotes,
+  readNote: readNote
+};
+
+Initialize npm - npm init -y
+Installing a node module - npm install validator@13.1.17
+
+Importing packages using ES6 - 
+    import validator from 'validator';
+    import isEmail from 'validator/lib/isEmail';
+
+Recreated the node_modules - 
+    npm install
+
+Parsing command line argument - 
+    console.log(process.argv[2])
+
+Debugging -
+    debugger // statement
+    node inspect app.js add --title="t1" --body="b1" // for windows refer videos
+    chrome://inspect
+    // Add folder to workspace in chrome
+    // restart in debug terminal - to restart Debugging
+
+Asynchromous Node.js - 
+    Call Stack - Whenever you call a function it is added to the call stack.
+    Event Loop - checks whether there is pending functions in call back stack.
+    Callback Queue - Function awaiting execution after async operation like timer is completed.
+
+// Express - Express JS documentattion
+
+// basic set up
+const  app = express()
+const port = process.env.PORT || 3000
+app.get('',(req, res) => {
+    res.send('Hello')
+} )
+app.listen(port, () => {
+    console.log("Server Started ....", port)
+})
+
+// for sending a JSOn response
+res.send({name:'Andrew', age:27})
+
+// serving the static assets
+app.use(express.static('pathtoPublic'))
+
+// HBS - nodemon app.js -e js,hbs
+
+// setting the views of hbs
+app.set('view engine','hbs')
+app.set('views',viewsPath) // to customize the view path
+
+
+// to send the data to hbs
+app.get('',(req, res) => {
+    res.render('index', {
+        title: 'Weather',
+        name: 'Andrew'
+    })
+} )
+
+
+// to view it in the hbs template
+<h1>{{title}}</h1>
+<p>Created by {{name}}</p>
+
+// To register partials - common components like header and footer
+hbs.registerPartials(partialsPath) 
+
+// Partial Syntax
+{{>header}}
+
+// setting up the error page - it needs to be at last.
+
+app.get('*',(req, res) => {
+    res.render('404', {
+        title: 'Error Page',
+        name: 'Andrew',
+        error: 'Page not found'
+    })
+} )
+
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: 'Error Page',
+        name: 'Andrew',
+        error: 'Help article not found'
+    })
+
+// fetch API - Client Side Scripting
+  const url = "/weather?address=" + address;
+  fetch(url).then((response) => {
+    response.json().then((data) => {
+      if (data.error) {
+        messageOne.textContent = data.error;
+        messageTwo.textContent = ""
+      } else {
+        messageOne.textContent = "";
+        messageTwo.textContent = data.location + "     " + data.forecast;
+      }
+    });
+  });
+
+// To parse incoming JSON to object 
+app.use(express.json());
+// create a new Router
+const router = new express.Router();
+//set up a router
+app.use(userRouter);
+
+// registering a middleware 
+userSchema.pre('save', async function (next) {
+
+// setting up statics 
+userSchema.statics.findByCredentials = async (email, password) =>
+
+//setting up instance methods 
+userSchema.methods.generateAuthToken = async function () {
+
+// setting up express middleware
+app.use((req, res, next) => {
+    console.log(req.method, req.path)
+    next()
+})
+
+// relationship between node_models
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    }
+// to populate the relationship
+const task = await Task.findById('scsdcdscdsc)
+await task.populate('owner').execPopluate()
+
+// set up a virtual property
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+// to get the tasks for a user
+const user = await User.findById('sdsdsc)
+await user.populate('tasks')
